@@ -1,0 +1,78 @@
+{
+  "generated_at": "2026-10-03",
+  "total_questions": 12,
+  "qa_pairs": [
+    {
+      "question": "What is the official bid number for the student computing devices RFP?",
+      "bid_scope": "Bid1",
+      "answer": "The official bid number for the student computing devices RFP is **JA-207652** [JA-207652 Student and Staff Computing Devices FINAL.pdf, p.3].",
+      "sources": []
+    },
+    {
+      "question": "What is the final submission deadline for Bid1 after all addendum extensions?",
+      "bid_scope": "Bid1",
+      "answer": "The final submission deadline for Bid1, after all addendum extensions, is **July 9, 2024, at 2:00 PM CST** [Addendum 2 RFP JA-207652 Student and Staff Computing Devices.pdf, p.1].",
+      "sources": []
+    },
+    {
+      "question": "Is a bid bond or security deposit required for Bid1?",
+      "bid_scope": "Bid1",
+      "answer": "A bid bond or security deposit is required for Bid1. The RFP states that \"Insurance and/or bond requirements are enumerated elsewhere in Contract documents\" and emphasizes that failure to provide insurance/bond under the Contract may be cause for termination for default [JA-207652 Student and Staff Computing Devices FINAL.pdf, p.17].",
+      "sources": []
+    },
+    {
+      "question": "What Dell laptop model and configuration is specified in the student computing devices bid?",
+      "bid_scope": "Bid1",
+      "answer": "The bid specifies the following Dell laptop models and configurations:\n\n1. **Tier 1 Staff Basic Laptop Minimum Requirements**:\n   - **Processor**: Intel i5 CPU, 14th Gen or equivalent\n   - **Display**: Minimum 13\" diagonal screen\n   - **Memory**: Minimum 16GB DDR5 RAM\n   - **Storage**: 512 GB NVMe SSD\n   - **Operating System**: Windows 11 or Mac OS\n   - **Warranty**: 3-year minimum [JA-207652, p.6].\n\n2. **Tier 2 Staff Laptop Minimum Requirements**:\n   - **Processor**: Intel i7 CPU, 14th Gen or equivalent\n   - **Display**: Minimum 13\" diagonal screen\n   - **Memory**: Minimum 32GB DDR5 RAM\n   - **Storage**: 1 TB NVMe SSD\n   - **Operating System**: Windows 11 or Mac OS\n   - **Warranty**: 3-year minimum [JA-207652, p.6].\n\nThe specific Dell model is not mentioned in the provided evidence.",
+      "sources": []
+    },
+    {
+      "question": "What cooperative purchasing contract does Dallas ISD reference for this bid?",
+      "bid_scope": "Bid1",
+      "answer": "Dallas ISD references the **Educational Purchasing Cooperative of North Texas (EPCNT)** as the cooperative purchasing contract for this bid. This is mentioned in the Interlocal Agreement section, which states that Dallas ISD is a member of EPCNT and that governmental entities utilizing internal governmental contracts with Dallas ISD will be eligible to purchase materials/services under the awarded contracts [JA-207652 Student and Staff Computing Devices FINAL.pdf, p.19].",
+      "sources": []
+    },
+    {
+      "question": "How many copies of the proposal must be submitted for Bid1?",
+      "bid_scope": "Bid1",
+      "answer": "For Bid1, the proposal must consist of one (1) original hard copy submitted manually. Electronic submissions are preferred, but if submitted manually, it must be delivered in a sealed envelope by the specified date and time [JA-207652 Student and Staff Computing Devices FINAL.pdf, p.9].",
+      "sources": []
+    },
+    {
+      "question": "What are the insurance requirements for vendors in Bid1?",
+      "bid_scope": "Bid1",
+      "answer": "The insurance requirements for vendors in Bid1 are as follows:\n\n1. Vendors must submit a certificate of insurance/bond that meets or exceeds the requirements of the solicitation document and/or subsequent contract. The District may rely on this certificate, which must accurately reflect the policy coverages and will become part of the Contract Documents. Failure to provide the required insurance/bond may lead to termination for default [JA-207652 Student and Staff Computing Devices FINAL.pdf, p.17].\n\n2. The vendor must notify the District in writing within ten (10) days of any changes that materially affect the insurance/bond coverage [JA-207652 Student and Staff Computing Devices FINAL.pdf, p.17].\n\n3. The vendor acknowledges that the District will not provide Workers Compensation coverage, and the vendor must ensure that all employees and subcontractors are covered by their own Workers Compensation insurance [JA-207652 Student and Staff Computing Devices FINAL.pdf, p.17].",
+      "sources": []
+    },
+    {
+      "question": "What changes did Addendum 2 make to the original RFP for Bid1?",
+      "bid_scope": "Bid1",
+      "answer": "Addendum 2 made the following change to the original RFP for Bid1:\n\n- It extended the due date of the RFP to **July 9, 2024, at 2:00 PM CST**. All other provisions and terms remain unchanged [Addendum 2 RFP JA-207652 Student and Staff Computing Devices.pdf, p.1].",
+      "sources": []
+    },
+    {
+      "question": "What affidavits are required for the Dell laptop bid (Bid2)?",
+      "bid_scope": "Bid2",
+      "answer": "For the Dell laptop bid (Bid2), the required affidavits are:\n\n1. **Warranty Affidavit**: A warranty certificate or affidavit must be presented upon award, detailing the Dell Limited Hardware Warranty extended for all machines purchased for 3 years [PORFP_-_Dell_Laptop_Final.pdf, p.3].\n\n2. **Mercury Affidavit**: This affidavit must confirm whether the products offered contain mercury, along with details about the mercury content if applicable [Mercury_Affidavit.pdf, p.1].\n\n3. **Contract Affidavit**: This affidavit affirms that all affirmations, certifications, or acknowledgments in the proposal remain true and correct [Contract_Affidavit.pdf, p.3].",
+      "sources": []
+    },
+    {
+      "question": "What are the warranty requirements for the Dell laptops in Bid2?",
+      "bid_scope": "Bid2",
+      "answer": "The warranty requirements for the Dell laptops in Bid2 are as follows:\n\n1. **Dell Limited Hardware Warranty**: Extended for all machines purchased for a duration of **3 years**.\n2. **Deliverables**: A warranty certificate or affidavit must be presented upon award.\n3. **Warranty Start Date**: The warranty starts on the date of delivery.\n4. **Warranty End Date**: The warranty ends 3 years following the date of delivery [PORFP_-_Dell_Laptop_Final.pdf, p.3].",
+      "sources": []
+    },
+    {
+      "question": "What is the contract number and issuing agency for the Dell laptop procurement?",
+      "bid_scope": "Bid2",
+      "answer": "The contract number for the Dell laptop procurement is **#E20P4600040**, and the issuing agency is the **State of Maryland Treasurer's Office** [PORFP_-_Dell_Laptop_Final.pdf, p.1; Dell Laptops w_Extended Warranty - Bid Information - {3} _ BidNet Direct.html, p.1].",
+      "sources": []
+    },
+    {
+      "question": "What delivery timeline is specified for Bid2?",
+      "bid_scope": "Bid2",
+      "answer": "The delivery timeline specified for Bid2 is within **45 days of Award** [PORFP_-_Dell_Laptop_Final.pdf, p.2].",
+      "sources": []
+    }
+  ]
+}

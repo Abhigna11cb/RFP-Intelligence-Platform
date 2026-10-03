@@ -20,7 +20,7 @@ HTML / PDF files (Bid1, Bid2, ...)
                ▼
 ┌─────────────────────────────────┐
 │   PostgreSQL 15 (pgvector)      │
-│   ├── vector(1536) ivfflat idx  │  ← text-embedding-3-large
+│   ├── vector(3072) exact scan   │  ← text-embedding-3-large (full dims)
 │   └── tsvector GIN idx          │  ← BM25 / full-text search
 └──────────────┬──────────────────┘
                │  search tool
@@ -108,7 +108,9 @@ DB_PASSWORD=your_postgres_password
 OPENAI_API_KEY=sk-...
 OPENAI_MODEL=gpt-4o-mini
 EMBEDDING_MODEL=text-embedding-3-large
-EMBEDDING_DIM=1536
+EMBEDDING_DIM=3072
+EMBEDDING_DIMENSIONS=3072
+EMBEDDING_PROVIDER=openai
 ```
 
 ---
@@ -230,10 +232,10 @@ python -m pytest rfp_platform/tests/test_search.py -v -m integration
 
 ## Design Decisions
 
-### Embedding Model: `text-embedding-3-large` (truncated to 1536-dim)
-- **Native max dimension:** 3072. We use **1536** via OpenAI's `dimensions` parameter (native truncation — not post-hoc PCA). This gives a 50% smaller pgvector index with virtually no quality loss (OpenAI reports <1% degradation).
+### Embedding Model: `text-embedding-3-large` at full 3072-dim
+- **Dimensions used:** 3072 (full native size — no truncation). The pgvector column is `vector(3072)`, matching both storage and query embeddings exactly.
 - **Why not all-mpnet-base-v2?** OpenAI's model scores ~15% higher on MTEB retrieval benchmarks, especially for domain-specific legal/procurement text. At ~$0.02 for the full corpus, cost is negligible.
-- **Why 1536 instead of 3072?** Half the storage, half the index size, faster ANN search — same retrieval quality for our corpus size.
+- **Why 3072 instead of truncating to 1536?** For our corpus size (~126 chunks), exact nearest-neighbour scan is sub-millisecond regardless of dimension. Full 3072-dim gives the best possible retrieval quality at no practical performance cost.
 
 ### Chunking Strategy: Heading-Aware + Table-Aware
 - `CHUNK_MIN_CHARS=1000`, `CHUNK_MAX_CHARS=3000`, `CHUNK_OVERLAP=200`
@@ -262,16 +264,20 @@ python -m pytest rfp_platform/tests/test_search.py -v -m integration
 
 ## Retrieval Evaluation Results
 
-17 questions across both bids (10 × Bid1, 7 × Bid2). See `eval_results.json` for full per-question breakdown.
+17 questions across both bids (10 × Bid1, 7 × Bid2). See [`eval_results.json`](eval_results.json) for full per-question breakdown.
 
 | Configuration | Recall@5 | Recall@10 | MRR |
 |---------------|----------|-----------|-----|
-| vector_only | — | — | — |
-| keyword_only | — | — | — |
-| hybrid (RRF) | — | — | — |
-| **hybrid + rerank** | — | — | — |
+| vector_only | 0.941 | 0.941 | 0.804 |
+| keyword_only | 0.176 | 0.176 | 0.147 |
+| hybrid (RRF) | 0.941 | 0.941 | 0.804 |
+| **hybrid + rerank** | **0.941** | **0.941** | **0.835** |
 
-> Run `python main.py eval` to populate this table with actual scores.
+> Run `python main.py eval` to generate `eval_results.json` with actual scores.
+
+See also:
+- [`qa_sample_log.json`](qa_sample_log.json) — 10+ cited Q&A examples
+- [`agent_trace_example.json`](agent_trace_example.json) — full extraction agent trace
 
 ---
 
@@ -379,7 +385,8 @@ requirements.txt
 | `DB_USER` | postgres | Database user |
 | `DB_PASSWORD` | — | Database password |
 | `EMBEDDING_MODEL` | text-embedding-3-large | OpenAI embedding model |
-| `EMBEDDING_DIM` | 1536 | Vector dimension (model native max = 3072; we truncate to 1536 for smaller index) |
+| `EMBEDDING_DIM` | 3072 | Vector dimension — full native size of text-embedding-3-large |
+| `EMBEDDING_DIMENSIONS` | 3072 | OpenAI API `dimensions` param — must match `EMBEDDING_DIM` |
 | `EMBEDDING_PROVIDER` | openai | `openai` or `local` |
 | `LLM_PROVIDER` | openai | `openai`, `anthropic`, `ollama` |
 | `OPENAI_API_KEY` | — | OpenAI API key |
