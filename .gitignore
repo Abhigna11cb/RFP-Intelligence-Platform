@@ -1,0 +1,76 @@
+# ── Secrets & Environment ──────────────────────────────────────
+.env
+.env.local
+.env.*.local
+.env.example
+
+# ── Virtual Environment ────────────────────────────────────────
+venv/
+.venv/
+env/
+ENV/
+
+# ── Python ─────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
+.eggs/
+
+# ── Pytest / Testing ───────────────────────────────────────────
+.pytest_cache/
+.coverage
+htmlcov/
+*.coveragerc
+
+# ── IDE / Editor ───────────────────────────────────────────────
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.swp
+.DS_Store
+Thumbs.db
+
+# ── Logs ───────────────────────────────────────────────────────
+*.log
+logs/
+
+# ── Output / Results ───────────────────────────────────────────
+*_results.json
+*_output.json
+Bid1_output.json
+Bid2_output.json
+outputs/
+
+# ── Jupyter ────────────────────────────────────────────────────
+.ipynb_checkpoints/
+*.ipynb
+
+# ── OS ─────────────────────────────────────────────────────────
+desktop.ini
+ehthumbs.db
+
+# ── Project-specific: ignore generated/temp files ──────────────
+workspace_overview.md
+scratch/
+*.png
+*.jpg
+*.jpeg
+
+# ── Streamlit ──────────────────────────────────────────────────
+.streamlit/
+
+# ── DB / Vector store local data ───────────────────────────────
+*.db
+*.sqlite
+*.sqlite3
