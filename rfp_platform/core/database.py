@@ -109,17 +109,17 @@ CREATE TABLE IF NOT EXISTS chunks (
     chunk_index     INTEGER NOT NULL,               -- within document
     chunk_text      TEXT NOT NULL,
     token_count     INTEGER,                        -- tiktoken cl100k_base count
-    embedding       vector(768),                    -- all-mpnet-base-v2, 768-dim (same as your app.py)
+    embedding       vector(3072),                   -- text-embedding-3-large, full 3072-dim
     fts_vector      tsvector                        -- BM25-style full-text index (auto-maintained)
         GENERATED ALWAYS AS (to_tsvector('english', chunk_text)) STORED,
     metadata        JSONB DEFAULT '{}',             -- any extra k/v pairs
     created_at      TIMESTAMPTZ DEFAULT NOW()
 );
 
--- Vector ANN index (IVFFlat — good balance of speed & recall for <1M chunks)
-CREATE INDEX IF NOT EXISTS idx_chunks_embedding
-    ON chunks USING ivfflat (embedding vector_cosine_ops)
-    WITH (lists = 50);
+-- NOTE: pgvector ANN indexes (ivfflat, hnsw) support max 2000 dims.
+-- At 3072-dim we use EXACT nearest-neighbor (sequential scan with <=> operator).
+-- For our corpus size (~200 chunks), exact scan is sub-millisecond and MORE accurate.
+-- ANN indexes only matter at 100,000+ vectors.
 
 -- Full-text GIN index for BM25 / keyword search
 CREATE INDEX IF NOT EXISTS idx_chunks_fts

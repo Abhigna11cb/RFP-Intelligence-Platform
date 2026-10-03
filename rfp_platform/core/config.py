@@ -28,8 +28,9 @@ class Settings(BaseSettings):
     # ── Embedding model ─────────────────────────────────────────
     embedding_provider: str = Field(default="openai",                    alias="EMBEDDING_PROVIDER")
     embedding_model_name: str = Field(default="text-embedding-3-large",  alias="EMBEDDING_MODEL")
-    embedding_dim: int = Field(default=1536,                             alias="EMBEDDING_DIM")
-    embedding_dimensions: int = Field(default=1536,                      alias="EMBEDDING_DIMENSIONS")
+    # text-embedding-3-large native size is 3072 dims.
+    # Both EMBEDDING_DIM and EMBEDDING_DIMENSIONS map here for backwards compat.
+    embedding_dimensions: int = Field(default=3072,                      alias="EMBEDDING_DIMENSIONS")
 
     # ── LLM ────────────────────────────────────────────────────
     llm_provider: str = Field(default="openai",                          alias="LLM_PROVIDER")

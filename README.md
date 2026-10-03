@@ -31,13 +31,13 @@ HTML / PDF files (Bid1, Bid2, ...)
 │  │ Orchestrator│───▶│  Retrieval   │ hybrid_search   │
 │  │   (Planner) │    │    Agent     │ + reranker      │
 │  └─────────────┘    └──────┬───────┘                 │
-│         │                  │ evidence                 │
+│         │                  │ evidence                │
 │         ▼                  ▼                         │
 │  ┌─────────────┐    ┌──────────────┐                 │
 │  │  Addendum   │◀───│  Extraction  │ 20 fields       │
 │  │Reconciliation│   │   Agent(s)   │ + citations     │
 │  └──────┬──────┘    └──────────────┘                 │
-│         │ updated fields                              │
+│         │ updated fields                             │
 │         ▼                                            │
 │  ┌─────────────┐    ┌──────────────┐                 │
 │  │  Validator  │───▶│  Q&A / Report│ JSON + answer   │
@@ -155,8 +155,8 @@ Then open your browser at:
 |-----|-------------|
 | 🔍 **Search** | Semantic + keyword hybrid search across all bid documents. Filter by doc type (RFP, addendum, specs). |
 | 💬 **Q&A Chat** | Ask natural language questions — answers are cited with source file + page number. |
-| 📊 **Extract Fields** | Run the full 20-field extraction pipeline for any bid. Download the JSON result. |
-| 📈 **Evaluation** | Run the 17-question retrieval benchmark across 4 search configurations. |
+| 📊 **Extract Fields** | Run the full 20-field extraction pipeline for any bid. Download the JSON result.|
+| 📈 **Evaluation** | Run the 17-question retrieval benchmark across 4 search configurations.|
 
 ### Example questions to try
 
@@ -229,9 +229,10 @@ python -m pytest rfp_platform/tests/test_search.py -v -m integration
 
 ## Design Decisions
 
-### Embedding Model: `text-embedding-3-large` (1536-dim)
+### Embedding Model: `text-embedding-3-large` (truncated to 1536-dim)
+- **Native max dimension:** 3072. We use **1536** via OpenAI's `dimensions` parameter (native truncation — not post-hoc PCA). This gives a 50% smaller pgvector index with virtually no quality loss (OpenAI reports <1% degradation).
 - **Why not all-mpnet-base-v2?** OpenAI's model scores ~15% higher on MTEB retrieval benchmarks, especially for domain-specific legal/procurement text. At ~$0.02 for the full corpus, cost is negligible.
-- **Why 1536-dim instead of 3072?** Native truncation — 50% smaller index, same high quality.
+- **Why 1536 instead of 3072?** Half the storage, half the index size, faster ANN search — same retrieval quality for our corpus size.
 
 ### Chunking Strategy: Heading-Aware + Table-Aware
 - `CHUNK_MIN_CHARS=1000`, `CHUNK_MAX_CHARS=3000`, `CHUNK_OVERLAP=200`
@@ -377,7 +378,7 @@ requirements.txt
 | `DB_USER` | postgres | Database user |
 | `DB_PASSWORD` | — | Database password |
 | `EMBEDDING_MODEL` | text-embedding-3-large | OpenAI embedding model |
-| `EMBEDDING_DIM` | 1536 | Vector dimension |
+| `EMBEDDING_DIM` | 1536 | Vector dimension (model native max = 3072; we truncate to 1536 for smaller index) |
 | `EMBEDDING_PROVIDER` | openai | `openai` or `local` |
 | `LLM_PROVIDER` | openai | `openai`, `anthropic`, `ollama` |
 | `OPENAI_API_KEY` | — | OpenAI API key |

@@ -3,7 +3,7 @@ Embedding provider — routes to OpenAI text-embedding-3-large or local sentence
 Configured via EMBEDDING_PROVIDER in .env.
 
 text-embedding-3-large:
-  - 1536 dimensions (truncated from 3072 — still excellent quality)
+  - 3072 dimensions (full native size — best retrieval quality)
   - API-based, costs ~$0.02 for the full bid corpus
   - Far better retrieval quality than all-mpnet-base-v2 for domain-specific text
 
@@ -78,7 +78,7 @@ def get_query_embedding(query: str) -> list[float]:
 def _openai_embeddings(texts: list[str]) -> list[list[float]]:
     """
     Call OpenAI text-embedding-3-large in batches of 100.
-    Uses dimensions=1536 (truncated from 3072) for smaller storage + same quality.
+    Uses dimensions=3072 (full native size) for maximum retrieval quality.
     """
     cfg = get_settings()
     client = _openai_client()
@@ -93,7 +93,7 @@ def _openai_embeddings(texts: list[str]) -> list[list[float]]:
         response = client.embeddings.create(
             model=cfg.embedding_model_name,          # text-embedding-3-large
             input=batch,
-            dimensions=cfg.embedding_dimensions,     # 1536 (truncation)
+            dimensions=cfg.embedding_dimensions,     # 3072 (full native dims)
         )
         batch_vecs = [item.embedding for item in response.data]
         all_embeddings.extend(batch_vecs)
