@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # RFP Intelligence Platform
 
 > AI-powered RAG Search Engine & Multi-Agent System for bid/RFP document analysis.
@@ -397,5 +397,4 @@ requirements.txt
 | `DEFAULT_TOP_K` | 10 | Default search results |
 | `RRF_K` | 60 | RRF fusion constant |
 =======
-# RFP-Intelligence-Platform
->>>>>>> 6dead1c70e801ba8156cbbb6ba594cc5e9a5bede
+
